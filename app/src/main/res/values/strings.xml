@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SimpleChat</string>
+    <string name="long_dummy_message">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</string>
+    <string name="dummy_name">Name</string>
+    <string name="dummy_timestamp">21 Nov 12:32pm</string>
+    <string name="refresh_button_name">Refresh</string>
+    <string name="send_button_name">Send</string>
+    <string name="network_error">Network Error</string>
 </resources>
