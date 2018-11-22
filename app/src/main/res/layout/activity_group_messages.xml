@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ProgressBar
         android:id="@+id/group_messages_loading_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="visible"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/group_messages_network_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/network_error"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/group_messages_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/zero_dp_variable_constraint"
+        android:padding="@dimen/group_messages_list_padding"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/group_messages_edittext_message">
 
@@ -41,28 +43,29 @@
         android:id="@+id/group_messages_edittext_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lines="2"
-        tools:text="@string/long_dummy_message"
         android:layout_alignParentBottom="true"
+        android:inputType="text"
+        android:lines="2"
         app:layout_constraintBottom_toTopOf="@id/group_messages_send"
-        android:inputType="text" />
+        tools:text="@string/long_dummy_message"
+        tools:ignore="LabelFor" />
 
     <Button
         android:id="@+id/group_messages_refresh"
         android:layout_width="@dimen/zero_dp_variable_constraint"
         android:layout_height="wrap_content"
+        android:text="@string/refresh_button_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/group_messages_send"
-        android:text="@string/refresh_button_name"/>
+        app:layout_constraintRight_toLeftOf="@id/group_messages_send" />
 
     <Button
         android:id="@+id/group_messages_send"
         android:layout_width="@dimen/zero_dp_variable_constraint"
         android:layout_height="wrap_content"
+        android:text="@string/send_button_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/group_messages_refresh"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/send_button_name"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

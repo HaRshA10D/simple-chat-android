@@ -5,4 +5,10 @@
     <dimen name="group_message_time_end_padding">8dp</dimen>
     <dimen name="group_message_time_start_padding">0dp</dimen>
     <dimen name="zero_dp_variable_constraint">0dp</dimen>
+    <dimen name="group_messages_list_padding">8dp</dimen>
+    <dimen name="group_message_top_margin">4dp</dimen>
+    <dimen name="group_message_bottom_margin">4dp</dimen>
+    <dimen name="message_name_padding">4dp</dimen>
+    <dimen name="message_text_padding">4dp</dimen>
+    <dimen name="group_message_toolbar_text">22sp</dimen>
 </resources>

@@ -8,6 +8,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/group_message_card_padding"
+    android:layout_marginTop="@dimen/group_message_top_margin"
+    android:layout_marginBottom="@dimen/group_message_bottom_margin"
     card_view:cardBackgroundColor="@color/white"
     card_view:cardCornerRadius="@dimen/group_message_card_radius">
 
@@ -21,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/red"
+            android:padding="@dimen/message_name_padding"
             tools:text="@string/dummy_name"/>
 
         <TextView
@@ -28,9 +31,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            android:padding="@dimen/message_text_padding"
             tools:text="@string/long_dummy_message" />
 
         <TextView
+            android:id="@+id/group_message_timestamp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/grey"
