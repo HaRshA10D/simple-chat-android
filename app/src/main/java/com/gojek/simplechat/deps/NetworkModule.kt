@@ -11,16 +11,19 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
 class NetworkModule {
 
     @Provides
+    @Singleton
     fun getSimpleChatApi(simpleChatRetrofit: Retrofit): SimpleChatApi {
         return simpleChatRetrofit.create(SimpleChatApi::class.java)
     }
 
     @Provides
+    @Singleton
     fun getRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
                 .client(okHttpClient)
@@ -32,6 +35,7 @@ class NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun getOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
@@ -39,6 +43,7 @@ class NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun getLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -46,6 +51,7 @@ class NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun getGson(): Gson {
         return Gson()
     }

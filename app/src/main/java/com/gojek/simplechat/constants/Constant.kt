@@ -1,6 +1,7 @@
 package com.gojek.simplechat.constants
 
 object Constant {
-    // TODO : Enter final base url
+    // TODO: Add the final base url of the service
     const val BASE_URL = ""
+    const val LOGIN_API_PATH = "/users/login"
 }
