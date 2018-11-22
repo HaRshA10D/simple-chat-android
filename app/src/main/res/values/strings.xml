@@ -5,4 +5,6 @@
     <string name="login">Login</string>
     <string name="join">Join</string>
     <string name="create">Create</string>
+    <string name="unexpected_error_msg">Unexpected Error, Please Try Again</string>
+    <string name="invalid_name_error_msg">Please enter a alphanumeric name</string>
 </resources>
