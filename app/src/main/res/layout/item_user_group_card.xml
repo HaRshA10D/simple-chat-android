@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:card_view="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="@dimen/user_group_card_view_height"
+android:layout_margin="@dimen/user_group_card_view_margin"
+android:gravity="center"
+card_view:cardCornerRadius="@dimen/user_group_card_view_radius"
+card_view:cardElevation="@dimen/user_group_card_view_elevation">
+
+<TextView
+    android:id="@+id/tvGroup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:textAlignment="center"
+    android:textSize="@dimen/user_group_card_view_font_size"
+    android:textStyle="bold"
+    tools:text="@string/group_name" />
+</android.support.v7.widget.CardView>

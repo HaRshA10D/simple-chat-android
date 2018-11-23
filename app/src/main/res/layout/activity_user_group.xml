@@ -10,15 +10,18 @@
         android:id="@+id/rvGroupList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/edit_text_height"
+        android:paddingBottom="@dimen/edit_text_height"
         app:layout_constraintBottom_toTopOf="@id/etGroupName"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/etGroupName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/edit_text_height"
         android:layout_marginLeft="@dimen/input_name_side_margin"
         android:layout_marginRight="@dimen/input_name_side_margin"
+        android:paddingTop="@dimen/input_name_side_margin"
         app:layout_constraintBottom_toTopOf="@id/btnJoinGroup">
 
         <EditText
@@ -33,12 +36,12 @@
 
     <Button
         android:id="@+id/btnJoinGroup"
-        android:layout_width="@dimen/zero_dp"
+        android:layout_width="@dimen/zero_dp_variable_constraint"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/group_home_outer_margin"
-        android:layout_marginEnd="@dimen/half_margin_between_button"
-        android:layout_marginBottom="@dimen/group_home_outer_margin"
-        android:text="@string/join"
+        android:layout_marginStart="@dimen/user_group_button_half_margin"
+        android:layout_marginEnd="@dimen/user_group_button_margin"
+        android:layout_marginBottom="@dimen/user_group_button_margin"
+        android:text="@string/user_group_join_group"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnCreateGroup"
         app:layout_constraintHorizontal_weight="1"
@@ -46,12 +49,12 @@
 
     <Button
         android:id="@+id/btnCreateGroup"
-        android:layout_width="@dimen/zero_dp"
+        android:layout_width="@dimen/zero_dp_variable_constraint"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/half_margin_between_button"
-        android:layout_marginEnd="@dimen/group_home_outer_margin"
-        android:layout_marginBottom="@dimen/group_home_outer_margin"
-        android:text="@string/create"
+        android:layout_marginStart="@dimen/user_group_button_half_margin"
+        android:layout_marginEnd="@dimen/user_group_button_margin"
+        android:layout_marginBottom="@dimen/user_group_button_margin"
+        android:text="@string/user_group_create_group"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"

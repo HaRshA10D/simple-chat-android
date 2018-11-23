@@ -15,9 +15,16 @@
     <dimen name="button_top_margin">8dp</dimen>
     <dimen name="banner_name_text_size">28sp</dimen>
     <dimen name="banner_text_bottom_margin">28dp</dimen>
-    <dimen name="group_home_outer_margin">16dp</dimen>
-    <dimen name="half_margin_between_button">8dp</dimen>
-    <dimen name="zero_dp">0dp</dimen>
-    <dimen name="card_view_padding">16dp</dimen>
-    <dimen name="card_view_font_size">18sp</dimen>
+
+
+    <dimen name="user_group_button_half_margin">8dp</dimen>
+    <dimen name="user_group_button_margin">16dp</dimen>
+
+
+    <dimen name="user_group_card_view_margin">8dp</dimen>
+    <dimen name="user_group_card_view_font_size">21sp</dimen>
+    <dimen name="user_group_card_view_radius">12dp</dimen>
+    <dimen name="user_group_card_view_elevation">4dp</dimen>
+    <dimen name="user_group_card_view_height">64dp</dimen>
+    <dimen name="edit_text_height">64dp</dimen>
 </resources>
