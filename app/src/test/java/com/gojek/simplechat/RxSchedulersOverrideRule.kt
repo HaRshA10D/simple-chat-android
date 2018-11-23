@@ -13,7 +13,9 @@ import java.util.concurrent.Callable
 class RxSchedulersOverrideRule : TestRule {
 
     private val schedulerInstance = Schedulers.trampoline()
-    private val schedulerFunction = Function<Scheduler, Scheduler> { schedulerInstance }
+
+    private val schedulerFunction = io.reactivex.functions.Function<Scheduler, Scheduler> { schedulerInstance }
+
     private val schedulerFunctionLazy = Function<Callable<Scheduler>, Scheduler> { schedulerInstance }
 
     override fun apply(base: Statement, description: Description): Statement {
