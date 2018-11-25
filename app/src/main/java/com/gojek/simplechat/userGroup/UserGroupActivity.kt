@@ -1,5 +1,6 @@
 package com.gojek.simplechat.userGroup
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -61,5 +62,12 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
 
     override fun showAlert(status: String) {
         Toast.makeText(applicationContext, status, Toast.LENGTH_SHORT).show()
+    }
+
+    companion object {
+        fun navigateToUserGroup(currentActivity: Activity): Intent {
+            return Intent(currentActivity, UserGroupActivity::class.java)
+        }
+
     }
 }
