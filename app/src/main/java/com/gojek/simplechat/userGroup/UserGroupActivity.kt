@@ -40,7 +40,7 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
     }
 
     private fun bindView() {
-        recyclerView = findViewById(R.id.rvGroupList)
+        recyclerView = findViewById(R.id.group_list_recycler_view)
     }
 
     private fun setLayoutManagerToRecyclerView() {
