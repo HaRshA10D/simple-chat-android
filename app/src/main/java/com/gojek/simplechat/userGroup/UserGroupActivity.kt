@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import com.gojek.simplechat.R
 import com.gojek.simplechat.constants.Constant
 import com.gojek.simplechat.datastore.SharedPreferenceModule
@@ -22,6 +19,8 @@ import com.gojek.simplechat.userGroup.model.*
 class UserGroupActivity : AppCompatActivity(), UserGroupView {
 
     private lateinit var userGroupRecyclerView: RecyclerView
+    private lateinit var userGroupLoadingBar: ProgressBar
+    private lateinit var userGroupNetworkErrorTextView: TextView
     private lateinit var userGroupPresenter: UserGroupPresenter
     private lateinit var userToken: String
     private lateinit var userGroupList: MutableList<UserGroup>
@@ -31,10 +30,13 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
         setContentView(R.layout.activity_user_group)
 
         userGroupRecyclerView = findViewById(R.id.group_list_recycler_view)
+        userGroupLoadingBar = findViewById(R.id.user_group_loading_bar)
+        userGroupNetworkErrorTextView = findViewById(R.id.user_group_network_error)
         val groupNameEditText = findViewById<EditText>(R.id.user_group_name)
         val createGroupButton = findViewById<Button>(R.id.create_group_button)
         val joinGroupButton = findViewById<Button>(R.id.join_group_button)
         setLayoutManagerToRecyclerView()
+        showLoadingScreen()
 
         userGroupPresenter = UserGroupPresenter(this)
         injectComponents(userGroupPresenter)
@@ -63,9 +65,28 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
         userGroupRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
     }
 
+    private fun showLoadingScreen() {
+        userGroupNetworkErrorTextView.visibility = TextView.GONE
+        userGroupRecyclerView.visibility = RecyclerView.GONE
+        userGroupLoadingBar.visibility = ProgressBar.VISIBLE
+    }
+
+    private fun showListScreen() {
+        userGroupNetworkErrorTextView.visibility = TextView.GONE
+        userGroupRecyclerView.visibility = RecyclerView.VISIBLE
+        userGroupLoadingBar.visibility = ProgressBar.GONE
+    }
+
+    private fun showErrorScreen() {
+        userGroupNetworkErrorTextView.visibility = TextView.VISIBLE
+        userGroupRecyclerView.visibility = RecyclerView.GONE
+        userGroupLoadingBar.visibility = ProgressBar.GONE
+    }
+
     override fun onGetUserGroupSuccessFetch(userGroupResponse: UserGroupResponse) {
         userGroupList = userGroupResponse.data.userGroupList
         userGroupRecyclerView.adapter = UserGroupAdapter(userGroupList) { groupId: String, groupName: String -> setGroupCardClickListener(groupId, groupName) }
+        showListScreen()
     }
 
     override fun setGroupCardClickListener(groupId: String, groupName: String) {
@@ -80,7 +101,7 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
     }
 
     override fun onGetUserGroupFailedFetch() {
-        // TODO: Handle Error When Server Error
+        showErrorScreen()
     }
 
     override fun showAlert(status: String) {
