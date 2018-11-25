@@ -44,33 +44,37 @@ class GroupMessagesPresenterTest {
         val groupMessage = GroupMessage("test", "test", "1111")
         val groupMessages = GroupMessages(listOf(groupMessage), "error")
         val groupMessagesResponse = GroupMessagesResponse(groupMessages)
-        Mockito.`when`(simpleChatApi.getLatestMessages("1")).thenReturn(Single.just(Response.success(groupMessagesResponse)))
-        groupMessagesPresenter.groupMessages("1")
+        val userToken = "mockUserToken"
+        Mockito.`when`(simpleChatApi.getLatestMessages("1", userToken)).thenReturn(Single.just(Response.success(groupMessagesResponse)))
+        groupMessagesPresenter.groupMessages("1", userToken)
         verify(groupMessagesView).populateGroupMessages(groupMessagesResponse)
     }
 
     @Test
     fun groupMessagesFailedResponseDueToServer() {
         val groupMessagesResponse = "{\"data\":{\"message\":\"Unauthorised user\" } }"
-        Mockito.`when`(simpleChatApi.getLatestMessages("1"))
+        val userToken = "mockUserToken"
+        Mockito.`when`(simpleChatApi.getLatestMessages("1", userToken))
                 .thenReturn(Single.just(Response.error(400, ResponseBody.create(MediaType.parse("application/json"), groupMessagesResponse))))
-        groupMessagesPresenter.groupMessages("1")
+        groupMessagesPresenter.groupMessages("1", userToken)
         verify(groupMessagesView).showCustomError("Unauthorised user")
     }
 
     @Test
     fun groupMessagesFailedResponseDueToWrongContractSentByServer() {
         val groupMessagesResponse = "{\"NoData\":{\"message\":\"Unauthorised user\" } }"
-        Mockito.`when`(simpleChatApi.getLatestMessages("1"))
+        val userToken = "mockUserToken"
+        Mockito.`when`(simpleChatApi.getLatestMessages("1", userToken))
                 .thenReturn(Single.just(Response.error(400, ResponseBody.create(MediaType.parse("application/json"), groupMessagesResponse))))
-        groupMessagesPresenter.groupMessages("1")
+        groupMessagesPresenter.groupMessages("1", userToken)
         verify(groupMessagesView).showCustomError("Something Went Wrong")
     }
 
     @Test
     fun networkError() {
-        Mockito.`when`(simpleChatApi.getLatestMessages("1")).thenReturn(Single.error(IOException()))
-        groupMessagesPresenter.groupMessages("1")
+        val userToken = "mockUserToken"
+        Mockito.`when`(simpleChatApi.getLatestMessages("1", userToken)).thenReturn(Single.error(IOException()))
+        groupMessagesPresenter.groupMessages("1", userToken)
         verify(groupMessagesView).showNetworkError()
     }
 }

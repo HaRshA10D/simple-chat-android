@@ -1,6 +1,7 @@
 package com.gojek.simplechat.groupMessage
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.View
 import android.widget.TextView
 import com.gojek.simplechat.R
 import com.gojek.simplechat.constants.Constant
+import com.gojek.simplechat.datastore.SharedPreferenceModule
 import com.gojek.simplechat.groupMessage.adapter.GroupMessagesAdapter
 import com.gojek.simplechat.deps.DaggerSimpleChatDeps
 import com.gojek.simplechat.groupMessage.model.GroupMessagesResponse
@@ -29,7 +31,9 @@ class GroupMessagesActivity : AppCompatActivity(), GroupMessagesView {
         setLayoutManager()
         setActionBar()
         showLoadingScreen()
-        groupMessagePresenter.groupMessages(groupId())
+        val sharedPreferences = getSharedPreferences(Constant.SIMPLE_CHAT_SHARED_PREF, Context.MODE_PRIVATE)
+        val userToken = SharedPreferenceModule(sharedPreferences).getUserToken()
+        groupMessagePresenter.groupMessages(groupId(), userToken)
     }
 
     override fun onResume() {

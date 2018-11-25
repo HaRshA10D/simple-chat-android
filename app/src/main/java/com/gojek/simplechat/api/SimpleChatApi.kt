@@ -18,7 +18,7 @@ interface SimpleChatApi {
     fun callLoginApi(@Body loginRequestBody: LoginRequestBody): Single<LoginResponseBody>
 
     @GET("groups/{id}/messages?page=1&per_page=10")
-    fun getLatestMessages(@Path("id") groupId: String): Single<Response<GroupMessagesResponse>>
+    fun getLatestMessages(@Path("id") groupId: String, @Header("Auth-Token") token: String): Single<Response<GroupMessagesResponse>>
 
     @GET("/groups")
     fun getUserGroups(@Header("Auth-Token") token: String): Single<Response<UserGroupResponse>>
