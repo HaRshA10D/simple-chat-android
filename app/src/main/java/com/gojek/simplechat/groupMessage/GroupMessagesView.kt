@@ -6,4 +6,6 @@ interface GroupMessagesView {
     fun populateGroupMessages(groupMessagesResponse: GroupMessagesResponse)
     fun showNetworkError()
     fun showCustomError(errorMessage: String?)
+    fun onSendMessageSuccessful()
+    fun onSendMessageFailed()
 }

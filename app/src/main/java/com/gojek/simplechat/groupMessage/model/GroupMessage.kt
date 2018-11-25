@@ -9,8 +9,8 @@ data class GroupMessage(
         @SerializedName("user_name") val userName: String,
         @SerializedName("text") val messageText: String,
         @SerializedName("message_sent_time") val messageTimestamp: String
-){
-    fun epochToDateTime() : String {
+) {
+    fun epochToDateTime(): String {
         val timestamp = messageTimestamp.toLong()
         val date = Date(timestamp)
         val format = SimpleDateFormat("dd/MM H:mm", Locale.US)

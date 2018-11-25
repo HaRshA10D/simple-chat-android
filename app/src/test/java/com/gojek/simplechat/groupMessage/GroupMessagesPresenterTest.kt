@@ -1,10 +1,8 @@
 package com.gojek.simplechat.groupMessage
 
 import com.gojek.simplechat.RxSchedulersOverrideRule
-import com.gojek.simplechat.groupMessage.model.GroupMessage
-import com.gojek.simplechat.groupMessage.model.GroupMessages
-import com.gojek.simplechat.groupMessage.model.GroupMessagesResponse
 import com.gojek.simplechat.api.SimpleChatApi
+import com.gojek.simplechat.groupMessage.model.*
 import io.reactivex.Single
 import okhttp3.MediaType
 import okhttp3.ResponseBody
@@ -76,5 +74,25 @@ class GroupMessagesPresenterTest {
         Mockito.`when`(simpleChatApi.getLatestMessages("1", userToken)).thenReturn(Single.error(IOException()))
         groupMessagesPresenter.groupMessages("1", userToken)
         verify(groupMessagesView).showNetworkError()
+    }
+
+    @Test
+    fun sendMessagesSuccessful() {
+        val sendMessageRequestBody = SendMessageRequestBody("Hey how are you","15431653420000")
+        val sendMessageResponseBody = SendMessageResponseBody(SendMessageResponse("Successfully created message"))
+        val userToken = "mockUserToken"
+        Mockito.`when`(simpleChatApi.sendMessage("1", userToken,sendMessageRequestBody)).thenReturn(Single.just(sendMessageResponseBody))
+        groupMessagesPresenter.sendMessageButtonClicked(userToken,"1","Hey how are you", "15431653420000")
+        verify(groupMessagesView).onSendMessageSuccessful()
+    }
+
+    @Test
+    fun sendMessagesFailed() {
+        val sendMessageRequestBody = SendMessageRequestBody("Hey how are you","15431653420000")
+        val sendMessageResponseBody = SendMessageResponseBody(SendMessageResponse("Successfully created message"))
+        val userToken = "mockUserToken"
+        Mockito.`when`(simpleChatApi.sendMessage("1", userToken,sendMessageRequestBody)).thenReturn(Single.error(IOException()))
+        groupMessagesPresenter.sendMessageButtonClicked(userToken,"1","Hey how are you", "15431653420000")
+        verify(groupMessagesView).onSendMessageFailed()
     }
 }

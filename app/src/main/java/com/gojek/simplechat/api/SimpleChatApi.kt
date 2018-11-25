@@ -2,6 +2,8 @@ package com.gojek.simplechat.api
 
 import com.gojek.simplechat.constants.Constant
 import com.gojek.simplechat.groupMessage.model.GroupMessagesResponse
+import com.gojek.simplechat.groupMessage.model.SendMessageRequestBody
+import com.gojek.simplechat.groupMessage.model.SendMessageResponseBody
 import com.gojek.simplechat.login.model.LoginRequestBody
 import com.gojek.simplechat.login.model.LoginResponseBody
 import com.gojek.simplechat.userGroup.model.CreateGroupRequestBody
@@ -28,4 +30,7 @@ interface SimpleChatApi {
 
     @POST("/groups/{name}/join")
     fun joinGroup(@Header("Auth-Token") token: String, @Path("name") groupName: String): Single<JoinGroupResponseBody>
+
+    @POST("/groups/{id}/messages")
+    fun sendMessage(@Path("id") groupId: String, @Header("Auth-Token") token: String, @Body sendMessageRequestBody: SendMessageRequestBody): Single<SendMessageResponseBody>
 }

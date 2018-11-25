@@ -17,4 +17,6 @@
     <string name="create_group_failure_message">Group creation failed</string>
     <string name="group_name_cannot_be_empty_message">Group name cannot be empty</string>
     <string name="join_group_success_message">Successfully join the group</string>
+    <string name="send_message_successful">Message Send Successfully</string>
+    <string name="message_send_failure">Message Send Failed</string>
 </resources>

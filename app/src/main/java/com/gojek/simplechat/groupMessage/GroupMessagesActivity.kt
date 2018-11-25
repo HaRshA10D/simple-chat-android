@@ -3,18 +3,20 @@ package com.gojek.simplechat.groupMessage
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.gojek.simplechat.R
 import com.gojek.simplechat.constants.Constant
 import com.gojek.simplechat.datastore.SharedPreferenceModule
-import com.gojek.simplechat.groupMessage.adapter.GroupMessagesAdapter
 import com.gojek.simplechat.deps.DaggerSimpleChatDeps
+import com.gojek.simplechat.groupMessage.adapter.GroupMessagesAdapter
 import com.gojek.simplechat.groupMessage.model.GroupMessagesResponse
 
 class GroupMessagesActivity : AppCompatActivity(), GroupMessagesView {
@@ -30,6 +32,8 @@ class GroupMessagesActivity : AppCompatActivity(), GroupMessagesView {
         injectComponents(groupMessagePresenter)
         bindTheView()
         val refreshButton = findViewById<Button>(R.id.group_messages_refresh)
+        val sendMessageButton = findViewById<Button>(R.id.group_messages_send)
+        val textMessageEditText = findViewById<EditText>(R.id.group_messages_edittext_message)
         setLayoutManager()
         setActionBar()
         showLoadingScreen()
@@ -37,6 +41,13 @@ class GroupMessagesActivity : AppCompatActivity(), GroupMessagesView {
         val userToken = SharedPreferenceModule(sharedPreferences).getUserToken()
         groupMessagePresenter.groupMessages(groupId(), userToken)
         refreshButton.setOnClickListener {
+            groupMessagePresenter.groupMessages(groupId(), userToken)
+        }
+
+        sendMessageButton.setOnClickListener {
+            val sendMessageTime = System.currentTimeMillis().toString()
+            val textMessage = textMessageEditText.text.toString()
+            groupMessagePresenter.sendMessageButtonClicked(userToken, groupId(), textMessage, sendMessageTime)
             groupMessagePresenter.groupMessages(groupId(), userToken)
         }
     }
@@ -99,6 +110,14 @@ class GroupMessagesActivity : AppCompatActivity(), GroupMessagesView {
     override fun showCustomError(errorMessage: String?) {
         showNetworkError()
         groupMessagesErrorView.text = errorMessage
+    }
+
+    override fun onSendMessageSuccessful() {
+        Toast.makeText(this, getString(R.string.send_message_successful), Toast.LENGTH_LONG).show()
+    }
+
+    override fun onSendMessageFailed() {
+        Toast.makeText(this, getString(R.string.message_send_failure), Toast.LENGTH_LONG).show()
     }
 
     companion object {
