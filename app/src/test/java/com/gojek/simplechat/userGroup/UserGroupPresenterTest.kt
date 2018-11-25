@@ -42,16 +42,18 @@ class UserGroupPresenterTest {
                 UserGroup("1", "Harsha"),
                 UserGroup("2", "Juan")
         ), null))
+        val mockUserToken = "123123-123123-123123"
 
-        `when`(simpleChatApi.getUserGroups()).thenReturn(Single.just(Response.success(response)))
-        userGroupPresenter.populateUserGroups()
+        `when`(simpleChatApi.getUserGroups(mockUserToken)).thenReturn(Single.just(Response.success(response)))
+        userGroupPresenter.populateUserGroups(mockUserToken)
         Mockito.verify(userGroupView).onGetUserGroupSuccessFetch(response)
     }
 
     @Test
     fun userGroupFailToFetchDueToNetworkError() {
-        `when`(simpleChatApi.getUserGroups()).thenReturn(Single.create { it.onError(IOException()) })
-        userGroupPresenter.populateUserGroups()
+        val mockUserToken = "123123-123123-123123"
+        `when`(simpleChatApi.getUserGroups(mockUserToken)).thenReturn(Single.create { it.onError(IOException()) })
+        userGroupPresenter.populateUserGroups(mockUserToken)
         Mockito.verify(userGroupView).onGetUserGroupFailedFetch()
     }
 

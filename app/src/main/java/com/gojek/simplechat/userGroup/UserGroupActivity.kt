@@ -1,6 +1,7 @@
 package com.gojek.simplechat.userGroup
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -9,6 +10,8 @@ import android.support.v7.widget.RecyclerView
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.gojek.simplechat.R
+import com.gojek.simplechat.constants.Constant
+import com.gojek.simplechat.datastore.SharedPreferenceModule
 import com.gojek.simplechat.deps.DaggerSimpleChatDeps
 import com.gojek.simplechat.groupMessage.GroupMessagesActivity
 import com.gojek.simplechat.userGroup.adapter.UserGroupAdapter
@@ -25,7 +28,9 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
         userGroupPresenter = UserGroupPresenter(this)
         injectComponents(userGroupPresenter)
         userGroupPresenter.init()
-        userGroupPresenter.populateUserGroups()
+        val sharedPreferences = getSharedPreferences(Constant.SIMPLE_CHAT_SHARED_PREF, Context.MODE_PRIVATE)
+        val userToken = SharedPreferenceModule(sharedPreferences).getUserToken()
+        userGroupPresenter.populateUserGroups(userToken!!)
     }
 
     private fun injectComponents(userGroupPresenter: UserGroupPresenter) {

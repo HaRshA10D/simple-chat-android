@@ -7,10 +7,7 @@ import com.gojek.simplechat.login.model.LoginResponseBody
 import com.gojek.simplechat.userGroup.model.UserGroupResponse
 import io.reactivex.Single
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface SimpleChatApi {
 
@@ -21,5 +18,5 @@ interface SimpleChatApi {
     fun getLatestMessages(@Path("id") groupId: String): Single<Response<GroupMessagesResponse>>
 
     @GET("/groups")
-    fun getUserGroups(): Single<Response<UserGroupResponse>>
+    fun getUserGroups(@Header("Auth-Token") token: String): Single<Response<UserGroupResponse>>
 }

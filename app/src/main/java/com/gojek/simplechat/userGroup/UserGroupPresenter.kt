@@ -17,8 +17,8 @@ class UserGroupPresenter(private val userGroupView: UserGroupView) {
     }
 
     @SuppressLint("CheckResult")
-    fun populateUserGroups() {
-        simpleChatApi.getUserGroups()
+    fun populateUserGroups(userToken: String) {
+        simpleChatApi.getUserGroups(userToken)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
