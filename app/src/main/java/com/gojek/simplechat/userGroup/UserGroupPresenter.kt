@@ -2,6 +2,7 @@ package com.gojek.simplechat.userGroup
 
 import android.annotation.SuppressLint
 import com.gojek.simplechat.api.SimpleChatApi
+import com.gojek.simplechat.error.JoinGroupHttpError
 import com.gojek.simplechat.userGroup.model.CreateGroupRequestBody
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -57,7 +58,8 @@ class UserGroupPresenter(private val userGroupView: UserGroupView) {
                     .subscribe({ result ->
                         userGroupView.onJoinGroupSuccess(result)
                     }, { error ->
-                        userGroupView.onJoinGroupFailed()
+                        val errorMessage = JoinGroupHttpError(error).getErrorResponseMessage()
+                        userGroupView.onJoinGroupFailed(errorMessage)
                     })
         }
     }

@@ -14,5 +14,5 @@ interface UserGroupView {
     fun groupNameIsEmptyMessage()
     fun navigateToGroupChatUI(groupId: String, groupName: String)
     fun onJoinGroupSuccess(joinGroupResponseBody: JoinGroupResponseBody)
-    fun onJoinGroupFailed()
+    fun onJoinGroupFailed(errorMessage: String)
 }

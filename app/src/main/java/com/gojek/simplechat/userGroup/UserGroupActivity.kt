@@ -107,8 +107,8 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
         Toast.makeText(this, getString(R.string.join_group_success_message), Toast.LENGTH_LONG).show()
     }
 
-    override fun onJoinGroupFailed() {
-        Toast.makeText(this, getString(R.string.join_group_failed_message), Toast.LENGTH_LONG).show()
+    override fun onJoinGroupFailed(errorMessage: String) {
+        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
     }
 
     override fun groupNameIsEmptyMessage() {

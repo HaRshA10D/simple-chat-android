@@ -6,4 +6,9 @@ object Constant {
     const val USER_TOKEN = "USER_TOKEN"
     const val USER_TOKEN_DEFAULT = ""
     const val SIMPLE_CHAT_SHARED_PREF = "SIMPLE_CHAT_SHARED_PREF"
+    const val UNAUTHORIZED_ACCESS = "Unauthorized Access"
+    const val GROUP_DOES_NOT_EXIST = "Group does not exist"
+    const val YOU_ALREADY_JOIN_THE_GROUP = "You already joined this group"
+    const val UNEXPECTED_ERROR = "Unexpected Error"
+    const val IO_EXCEPTION = "IO Exception"
 }

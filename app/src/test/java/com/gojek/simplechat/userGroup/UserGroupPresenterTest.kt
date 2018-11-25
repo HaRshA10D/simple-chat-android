@@ -2,6 +2,7 @@ package com.gojek.simplechat.userGroup
 
 import com.gojek.simplechat.RxSchedulersOverrideRule
 import com.gojek.simplechat.api.SimpleChatApi
+import com.gojek.simplechat.constants.Constant
 import com.gojek.simplechat.userGroup.model.*
 import io.reactivex.Single
 import org.junit.Before
@@ -116,8 +117,9 @@ class UserGroupPresenterTest {
     fun joinGroupFailed() {
         val mockUserToken = "123123-123123-123123"
         val mockUserGroupName = "ops-tech"
+        val errorMessage = Constant.IO_EXCEPTION
         `when`(simpleChatApi.joinGroup(mockUserToken, mockUserGroupName)).thenReturn(Single.error(IOException()))
         userGroupPresenter.joinGroupButtonClicked(mockUserToken, mockUserGroupName)
-        Mockito.verify(userGroupView).onJoinGroupFailed()
+        Mockito.verify(userGroupView).onJoinGroupFailed(errorMessage)
     }
 }
