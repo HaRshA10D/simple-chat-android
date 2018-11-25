@@ -3,8 +3,6 @@ package com.gojek.simplechat.userGroup
 import com.gojek.simplechat.userGroup.model.UserGroupResponse
 
 interface UserGroupView {
-    fun bindView()
-    fun setLayoutManagerToRecyclerView()
     fun onGetUserGroupSuccessFetch(userGroupResponse: UserGroupResponse)
     fun onGetUserGroupFailedFetch()
     fun setGroupCardClickListener(groupId: String, groupName: String)

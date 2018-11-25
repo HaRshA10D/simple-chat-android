@@ -11,11 +11,6 @@ class UserGroupPresenter(private val userGroupView: UserGroupView) {
     @Inject
     lateinit var simpleChatApi: SimpleChatApi
 
-    fun init() {
-        userGroupView.bindView()
-        userGroupView.setLayoutManagerToRecyclerView()
-    }
-
     @SuppressLint("CheckResult")
     fun populateUserGroups(userToken: String) {
         simpleChatApi.getUserGroups(userToken)

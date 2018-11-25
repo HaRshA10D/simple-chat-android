@@ -27,10 +27,11 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
         setContentView(R.layout.activity_user_group)
         userGroupPresenter = UserGroupPresenter(this)
         injectComponents(userGroupPresenter)
-        userGroupPresenter.init()
         val sharedPreferences = getSharedPreferences(Constant.SIMPLE_CHAT_SHARED_PREF, Context.MODE_PRIVATE)
         val userToken = SharedPreferenceModule(sharedPreferences).getUserToken()
         userGroupPresenter.populateUserGroups(userToken!!)
+        bindView()
+        setLayoutManagerToRecyclerView()
     }
 
     private fun injectComponents(userGroupPresenter: UserGroupPresenter) {
@@ -38,11 +39,11 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
         daggerUserGroupComponents.inject(userGroupPresenter)
     }
 
-    override fun bindView() {
+    private fun bindView() {
         recyclerView = findViewById(R.id.rvGroupList)
     }
 
-    override fun setLayoutManagerToRecyclerView() {
+    private fun setLayoutManagerToRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
     }
 
