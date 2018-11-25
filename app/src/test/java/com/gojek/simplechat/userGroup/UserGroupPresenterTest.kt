@@ -93,4 +93,31 @@ class UserGroupPresenterTest {
         userGroupPresenter.createGroupButtonClicked(mockUserToken, mockUserGroupName)
         Mockito.verify(userGroupView).onCreateGroupFailed()
     }
+
+    @Test
+    fun groupNameOnJoinGroupCannotBeEmpty() {
+        userGroupPresenter.joinGroupButtonClicked("123", "")
+        Mockito.verify(userGroupView).groupNameIsEmptyMessage()
+    }
+
+    @Test
+    fun groupJoinedSucessfully() {
+        val response = JoinGroupResponseBody(
+                Group("1", "ops-tech")
+        )
+        val mockUserToken = "123123-123123-123123"
+        val mockUserGroupName = "ops-tech"
+        `when`(simpleChatApi.joinGroup(mockUserToken, mockUserGroupName)).thenReturn(Single.just(response))
+        userGroupPresenter.joinGroupButtonClicked(mockUserToken, mockUserGroupName)
+        Mockito.verify(userGroupView).onJoinGroupSuccess(response)
+    }
+
+    @Test
+    fun joinGroupFailed() {
+        val mockUserToken = "123123-123123-123123"
+        val mockUserGroupName = "ops-tech"
+        `when`(simpleChatApi.joinGroup(mockUserToken, mockUserGroupName)).thenReturn(Single.error(IOException()))
+        userGroupPresenter.joinGroupButtonClicked(mockUserToken, mockUserGroupName)
+        Mockito.verify(userGroupView).onJoinGroupFailed()
+    }
 }

@@ -1,6 +1,7 @@
 package com.gojek.simplechat.userGroup
 
 import com.gojek.simplechat.userGroup.model.CreateGroupResponseBody
+import com.gojek.simplechat.userGroup.model.JoinGroupResponseBody
 import com.gojek.simplechat.userGroup.model.UserGroupResponse
 
 interface UserGroupView {
@@ -12,4 +13,6 @@ interface UserGroupView {
     fun onCreateGroupFailed()
     fun groupNameIsEmptyMessage()
     fun navigateToGroupChatUI(groupId: String, groupName: String)
+    fun onJoinGroupSuccess(joinGroupResponseBody: JoinGroupResponseBody)
+    fun onJoinGroupFailed()
 }

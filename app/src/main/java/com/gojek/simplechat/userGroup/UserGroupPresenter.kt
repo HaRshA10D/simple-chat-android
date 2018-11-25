@@ -44,4 +44,21 @@ class UserGroupPresenter(private val userGroupView: UserGroupView) {
     fun groupCardClicked(groupId: String, groupName: String) {
         userGroupView.navigateToGroupChatUI(groupId, groupName)
     }
+
+    @SuppressLint("CheckResult")
+    fun joinGroupButtonClicked(userToken: String, groupName: String) {
+
+        if (groupName.isEmpty()) {
+            userGroupView.groupNameIsEmptyMessage()
+        } else {
+            simpleChatApi.joinGroup(userToken, groupName)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ result ->
+                        userGroupView.onJoinGroupSuccess(result)
+                    }, { error ->
+                        userGroupView.onJoinGroupFailed()
+                    })
+        }
+    }
 }

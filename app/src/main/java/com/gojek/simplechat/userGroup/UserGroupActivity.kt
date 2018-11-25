@@ -33,6 +33,7 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
         userGroupRecyclerView = findViewById(R.id.group_list_recycler_view)
         val groupNameEditText = findViewById<EditText>(R.id.user_group_name)
         val createGroupButton = findViewById<Button>(R.id.create_group_button)
+        val joinGroupButton = findViewById<Button>(R.id.join_group_button)
         setLayoutManagerToRecyclerView()
 
         userGroupPresenter = UserGroupPresenter(this)
@@ -45,6 +46,11 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
         createGroupButton.setOnClickListener {
             val groupName = groupNameEditText.text.toString()
             userGroupPresenter.createGroupButtonClicked(userToken, groupName)
+        }
+
+        joinGroupButton.setOnClickListener {
+            val groupName = groupNameEditText.text.toString()
+            userGroupPresenter.joinGroupButtonClicked(userToken, groupName)
         }
     }
 
@@ -91,6 +97,18 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
 
     override fun onCreateGroupFailed() {
         Toast.makeText(this, getString(R.string.create_group_failure_message), Toast.LENGTH_LONG).show()
+    }
+
+    override fun onJoinGroupSuccess(joinGroupResponseBody: JoinGroupResponseBody) {
+        val newUserGroup = UserGroup(joinGroupResponseBody.data.id, joinGroupResponseBody.data.name)
+        userGroupList.add(newUserGroup)
+        userGroupRecyclerView.adapter?.notifyItemInserted(userGroupList.size - 1)
+        userGroupRecyclerView.smoothScrollToPosition(userGroupList.size - 1)
+        Toast.makeText(this, getString(R.string.join_group_success_message), Toast.LENGTH_LONG).show()
+    }
+
+    override fun onJoinGroupFailed() {
+        Toast.makeText(this, getString(R.string.join_group_failed_message), Toast.LENGTH_LONG).show()
     }
 
     override fun groupNameIsEmptyMessage() {
