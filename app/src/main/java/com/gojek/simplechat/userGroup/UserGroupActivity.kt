@@ -73,10 +73,10 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
     }
 
     override fun navigateToGroupChatUI(groupId: String, groupName: String) {
-        val intent = Intent(this, GroupMessagesActivity::class.java)
-        intent.putExtra("groupId", groupId)
-        intent.putExtra("groupName", groupName)
-        // TODO: Sent the group ID and groupName to Next Activity
+        val intent = GroupMessagesActivity.navigateToGroupMessageActivity(this)
+        intent.putExtra(Constant.GROUP_ID, groupId)
+        intent.putExtra(Constant.GROUP_NAME, groupName)
+        startActivity(intent)
     }
 
     override fun onGetUserGroupFailedFetch() {

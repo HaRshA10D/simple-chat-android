@@ -1,5 +1,7 @@
 package com.gojek.simplechat.groupMessage
 
+import android.app.Activity
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -7,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 import com.gojek.simplechat.R
+import com.gojek.simplechat.constants.Constant
 import com.gojek.simplechat.groupMessage.adapter.GroupMessagesAdapter
 import com.gojek.simplechat.deps.DaggerSimpleChatDeps
 import com.gojek.simplechat.groupMessage.model.GroupMessagesResponse
@@ -35,14 +38,14 @@ class GroupMessagesActivity : AppCompatActivity(), GroupMessagesView {
     }
 
     private fun setActionBar() {
-        // TODO: get the group name from the previous activity
-        supportActionBar?.title = "Group"
+        val groupName = intent.getStringExtra(Constant.GROUP_NAME)
+        supportActionBar?.title = groupName
     }
 
 
     private fun groupId(): String {
-        // TODO: get the id from previous activity
-        return "1"
+        val groupId = intent.getStringExtra(Constant.GROUP_ID)
+        return groupId
     }
 
     private fun injectComponents(groupMessagePresenter: GroupMessagesPresenter) {
@@ -87,5 +90,12 @@ class GroupMessagesActivity : AppCompatActivity(), GroupMessagesView {
     override fun showCustomError(errorMessage: String?) {
         showNetworkError()
         groupMessagesErrorView.text = errorMessage
+    }
+
+    companion object {
+
+        fun navigateToGroupMessageActivity(currentActivity: Activity): Intent {
+            return Intent(currentActivity, GroupMessagesActivity::class.java)
+        }
     }
 }
