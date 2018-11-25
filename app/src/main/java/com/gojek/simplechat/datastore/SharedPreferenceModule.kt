@@ -11,7 +11,7 @@ class SharedPreferenceModule(private val sharedPreferences: SharedPreferences) {
         storeToken.apply()
     }
 
-    fun getUserToken(): String? {
-        return sharedPreferences.getString(Constant.USER_TOKEN, Constant.USER_TOKEN_DEFAULT)
+    fun getUserToken(): String {
+        return sharedPreferences.getString(Constant.USER_TOKEN, Constant.USER_TOKEN_DEFAULT)!!
     }
 }

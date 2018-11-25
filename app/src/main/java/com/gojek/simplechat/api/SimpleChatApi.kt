@@ -4,6 +4,8 @@ import com.gojek.simplechat.constants.Constant
 import com.gojek.simplechat.groupMessage.model.GroupMessagesResponse
 import com.gojek.simplechat.login.model.LoginRequestBody
 import com.gojek.simplechat.login.model.LoginResponseBody
+import com.gojek.simplechat.userGroup.model.CreateGroupRequestBody
+import com.gojek.simplechat.userGroup.model.CreateGroupResponseBody
 import com.gojek.simplechat.userGroup.model.UserGroupResponse
 import io.reactivex.Single
 import retrofit2.Response
@@ -19,4 +21,7 @@ interface SimpleChatApi {
 
     @GET("/groups")
     fun getUserGroups(@Header("Auth-Token") token: String): Single<Response<UserGroupResponse>>
+
+    @POST("/groups")
+    fun createGroup(@Header("Auth-Token") token: String, @Body createGroupRequestBody: CreateGroupRequestBody): Single<CreateGroupResponseBody>
 }

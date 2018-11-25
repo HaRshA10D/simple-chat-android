@@ -13,4 +13,7 @@
     <string name="user_group_create_group">Create</string>
     <string name="unexpected_error_msg">Unexpected Error, Please Try Again</string>
     <string name="invalid_name_error_msg">Please enter a alphanumeric name</string>
+    <string name="create_group_success_message">Successfully created the group</string>
+    <string name="create_group_failure_message">Group creation failed</string>
+    <string name="group_name_cannot_be_empty_message">Group name cannot be empty</string>
 </resources>
