@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import com.gojek.simplechat.R
 import com.gojek.simplechat.constants.Constant
@@ -28,12 +29,16 @@ class GroupMessagesActivity : AppCompatActivity(), GroupMessagesView {
         val groupMessagePresenter = GroupMessagesPresenter(this)
         injectComponents(groupMessagePresenter)
         bindTheView()
+        val refreshButton = findViewById<Button>(R.id.group_messages_refresh)
         setLayoutManager()
         setActionBar()
         showLoadingScreen()
         val sharedPreferences = getSharedPreferences(Constant.SIMPLE_CHAT_SHARED_PREF, Context.MODE_PRIVATE)
         val userToken = SharedPreferenceModule(sharedPreferences).getUserToken()
         groupMessagePresenter.groupMessages(groupId(), userToken)
+        refreshButton.setOnClickListener {
+            groupMessagePresenter.groupMessages(groupId(), userToken)
+        }
     }
 
     override fun onResume() {
