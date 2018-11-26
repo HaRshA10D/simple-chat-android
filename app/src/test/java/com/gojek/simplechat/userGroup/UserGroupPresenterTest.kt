@@ -122,4 +122,26 @@ class UserGroupPresenterTest {
         userGroupPresenter.joinGroupButtonClicked(mockUserToken, mockUserGroupName)
         Mockito.verify(userGroupView).onJoinGroupFailed(errorMessage)
     }
+
+    @Test
+    fun groupCreated() {
+        val request = CreateGroupRequestBody(
+                "opstech"
+        )
+        val response = CreateGroupResponseBody(
+                Group("1", "opstech")
+        )
+        val mockUserToken = "123123-123123-123123"
+        val validGroupName = "opstech"
+        `when`(simpleChatApi.createGroup(mockUserToken, request)).thenReturn(Single.just(response))
+        userGroupPresenter.isValidUserGroupName(validGroupName)
+        Mockito.verify(userGroupView).createUserGroup(validGroupName)
+    }
+
+    @Test
+    fun groupNameIsNotAlphanumeric() {
+        val notAlphanumericGroupName = "[]"
+        userGroupPresenter.isValidUserGroupName(notAlphanumericGroupName)
+        Mockito.verify(userGroupView).groupNameIsNotAlphanumeric()
+    }
 }

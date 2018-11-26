@@ -14,13 +14,17 @@ import com.gojek.simplechat.datastore.SharedPreferenceModule
 import com.gojek.simplechat.deps.DaggerSimpleChatDeps
 import com.gojek.simplechat.groupMessage.GroupMessagesActivity
 import com.gojek.simplechat.userGroup.adapter.UserGroupAdapter
-import com.gojek.simplechat.userGroup.model.*
+import com.gojek.simplechat.userGroup.model.CreateGroupResponseBody
+import com.gojek.simplechat.userGroup.model.JoinGroupResponseBody
+import com.gojek.simplechat.userGroup.model.UserGroup
+import com.gojek.simplechat.userGroup.model.UserGroupResponse
 
 class UserGroupActivity : AppCompatActivity(), UserGroupView {
 
     private lateinit var userGroupRecyclerView: RecyclerView
     private lateinit var userGroupLoadingBar: ProgressBar
     private lateinit var userGroupNetworkErrorTextView: TextView
+    private lateinit var groupNameEditText: EditText
     private lateinit var userGroupPresenter: UserGroupPresenter
     private lateinit var userToken: String
     private lateinit var userGroupList: MutableList<UserGroup>
@@ -32,7 +36,7 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
         userGroupRecyclerView = findViewById(R.id.group_list_recycler_view)
         userGroupLoadingBar = findViewById(R.id.user_group_loading_bar)
         userGroupNetworkErrorTextView = findViewById(R.id.user_group_network_error)
-        val groupNameEditText = findViewById<EditText>(R.id.user_group_name)
+        groupNameEditText = findViewById(R.id.user_group_name)
         val createGroupButton = findViewById<Button>(R.id.create_group_button)
         val joinGroupButton = findViewById<Button>(R.id.join_group_button)
         setLayoutManagerToRecyclerView()
@@ -47,7 +51,7 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
 
         createGroupButton.setOnClickListener {
             val groupName = groupNameEditText.text.toString()
-            userGroupPresenter.createGroupButtonClicked(userToken, groupName)
+            userGroupPresenter.isValidUserGroupName(groupName)
         }
 
         joinGroupButton.setOnClickListener {
@@ -134,6 +138,14 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
 
     override fun groupNameIsEmptyMessage() {
         Toast.makeText(this, getString(R.string.group_name_cannot_be_empty_message), Toast.LENGTH_LONG).show()
+    }
+
+    override fun groupNameIsNotAlphanumeric() {
+        groupNameEditText.error = getString(R.string.invalid_group_name_error_message)
+    }
+
+    override fun createUserGroup(userGroupName: String) {
+        userGroupPresenter.createGroupButtonClicked(userToken, userGroupName)
     }
 
     companion object {

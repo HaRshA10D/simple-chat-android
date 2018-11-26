@@ -13,4 +13,5 @@ object Constant {
     const val IO_EXCEPTION = "IO Exception"
     const val GROUP_ID = "group_id"
     const val GROUP_NAME = "group_name"
+    const val GROUP_NAME_REGEX_MATCHER = "^\\w+\$"
 }

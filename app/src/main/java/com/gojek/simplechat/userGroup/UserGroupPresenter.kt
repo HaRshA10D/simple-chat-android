@@ -1,11 +1,14 @@
 package com.gojek.simplechat.userGroup
 
 import android.annotation.SuppressLint
+import com.gojek.simplechat.R
 import com.gojek.simplechat.api.SimpleChatApi
+import com.gojek.simplechat.constants.Constant
 import com.gojek.simplechat.error.JoinGroupHttpError
 import com.gojek.simplechat.userGroup.model.CreateGroupRequestBody
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 class UserGroupPresenter(private val userGroupView: UserGroupView) {
@@ -61,6 +64,18 @@ class UserGroupPresenter(private val userGroupView: UserGroupView) {
                         val errorMessage = JoinGroupHttpError(error).getErrorResponseMessage()
                         userGroupView.onJoinGroupFailed(errorMessage)
                     })
+        }
+    }
+
+    fun isValidUserGroupName(userGroupName: String){
+        val userGroupNamePattern = Constant.GROUP_NAME_REGEX_MATCHER
+        val pattern = Pattern.compile(userGroupNamePattern)
+        val matcher = pattern.matcher(userGroupName)
+
+        if (matcher.matches()) {
+            userGroupView.createUserGroup(userGroupName)
+        } else {
+            userGroupView.groupNameIsNotAlphanumeric()
         }
     }
 }
