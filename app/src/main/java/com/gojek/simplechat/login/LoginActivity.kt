@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
         submitNameButton.setOnClickListener {
             val userName = userNameEditText?.text.toString()
             if (loginPresenter.isNameValid(userName)) {
-                loginPresenter.loginUser(userName)
+                loginPresenter.loginUser(userName.toLowerCase())
             } else {
                 Toast.makeText(this, getString(R.string.invalid_name_error_msg), Toast.LENGTH_LONG).show()
             }
