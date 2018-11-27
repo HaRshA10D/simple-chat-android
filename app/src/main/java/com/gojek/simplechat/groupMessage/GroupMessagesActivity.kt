@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -48,7 +49,9 @@ class GroupMessagesActivity : AppCompatActivity(), GroupMessagesView {
             val sendMessageTime = System.currentTimeMillis().toString()
             val textMessage = textMessageEditText.text.toString()
             groupMessagePresenter.sendMessageButtonClicked(userToken, groupId(), textMessage, sendMessageTime)
-            groupMessagePresenter.groupMessages(groupId(), userToken)
+            Handler().postDelayed({
+                groupMessagePresenter.groupMessages(groupId(), userToken)
+            }, Constant.HUNDRED_MILLISECOND)
         }
     }
 
