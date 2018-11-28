@@ -44,8 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:inputType="text"
-        android:lines="2"
+        android:inputType="textMultiLine"
+        android:maxLines="4"
         app:layout_constraintBottom_toTopOf="@id/group_messages_send"
         tools:text="@string/long_dummy_message"
         tools:ignore="LabelFor" />
