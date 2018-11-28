@@ -48,7 +48,11 @@ class GroupMessagesActivity : AppCompatActivity(), GroupMessagesView {
         sendMessageButton.setOnClickListener {
             val sendMessageTime = System.currentTimeMillis().toString()
             val textMessage = textMessageEditText.text.toString()
-            groupMessagePresenter.sendMessageButtonClicked(userToken, groupId(), textMessage, sendMessageTime)
+            if (textMessage.isEmpty()){
+                Toast.makeText(this, getString(R.string.blank_message_warning), Toast.LENGTH_LONG).show()
+            } else {
+                groupMessagePresenter.sendMessageButtonClicked(userToken, groupId(), textMessage, sendMessageTime)
+            }
             Handler().postDelayed({
                 groupMessagePresenter.groupMessages(groupId(), userToken)
             }, Constant.HUNDRED_MILLISECOND)

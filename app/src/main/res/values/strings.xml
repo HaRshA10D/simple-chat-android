@@ -20,4 +20,5 @@
     <string name="send_message_successful">Message Send Successfully</string>
     <string name="message_send_failure">Message Send Failed</string>
     <string name="invalid_group_name_error_message">Invalid Group Name, Use only alphanumeric</string>
+    <string name="blank_message_warning">Message can\'t be blank</string>
 </resources>
