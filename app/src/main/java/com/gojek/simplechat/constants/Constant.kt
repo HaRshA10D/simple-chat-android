@@ -15,4 +15,5 @@ object Constant {
     const val GROUP_NAME = "group_name"
     const val GROUP_NAME_REGEX_MATCHER = "^\\w+\$"
     const val TIMEOUT: Long = 15
+    const val HUNDRED_MILLISECOND = 100L
 }
