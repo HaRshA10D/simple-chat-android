@@ -117,6 +117,7 @@ class UserGroupActivity : AppCompatActivity(), UserGroupView {
         userGroupList.add(newUserGroup)
         userGroupRecyclerView.adapter?.notifyItemInserted(userGroupList.size - 1)
         userGroupRecyclerView.smoothScrollToPosition(userGroupList.size - 1)
+        groupNameEditText.text.clear()
         Toast.makeText(this, getString(R.string.create_group_success_message), Toast.LENGTH_LONG).show()
     }
 

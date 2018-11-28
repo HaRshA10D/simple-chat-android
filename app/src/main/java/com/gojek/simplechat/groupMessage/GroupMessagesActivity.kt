@@ -25,6 +25,8 @@ class GroupMessagesActivity : AppCompatActivity(), GroupMessagesView {
     private lateinit var groupMessagesListView: RecyclerView
     private lateinit var groupMessagesLoadingView: View
     private lateinit var groupMessagesErrorView: TextView
+    private lateinit var textMessageEditText: EditText
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +36,7 @@ class GroupMessagesActivity : AppCompatActivity(), GroupMessagesView {
         bindTheView()
         val refreshButton = findViewById<Button>(R.id.group_messages_refresh)
         val sendMessageButton = findViewById<Button>(R.id.group_messages_send)
-        val textMessageEditText = findViewById<EditText>(R.id.group_messages_edittext_message)
+        textMessageEditText = findViewById<EditText>(R.id.group_messages_edittext_message)
         setLayoutManager()
         setActionBar()
         showLoadingScreen()
@@ -120,6 +122,7 @@ class GroupMessagesActivity : AppCompatActivity(), GroupMessagesView {
     }
 
     override fun onSendMessageSuccessful() {
+        textMessageEditText.text.clear()
         Toast.makeText(this, getString(R.string.send_message_successful), Toast.LENGTH_LONG).show()
     }
 
